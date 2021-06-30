@@ -146,13 +146,8 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
           ))}
         </div>
 
-        <div
-          className="artGallery__btn"
-          onClick={() => setImageList([...imageList, ...artData])}
-        >
-          <button className="load__text " onClick={() => handleLoadMore()}>
-            Load More
-          </button>
+        <div className="artGallery__btn" onClick={() => handleLoadMore()}>
+          Load More
         </div>
       </section>
     </>

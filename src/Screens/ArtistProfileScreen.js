@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import { getArtistProfileFun, getArtistArtFun } from "../action/artistProfile";
 import DisplayArt from "../Components/DisplayArt";
@@ -12,23 +12,28 @@ import profile from "../assets/Images/arts/25.jpg";
 import insta from "../assets/Images/insta.svg";
 import facebook from "../assets/Images/facebook.svg";
 import { useParams } from "react-router-dom";
+import { CLEAR_ARTIST_ART_LIST } from "../action/action.type";
 
 const ArtistProfileScreen = ({
   artistProfile,
+  lastArt,
   artistArtList,
   getArtistArtFun,
   getArtistProfileFun,
 }) => {
   const { artistuid } = useParams();
+  const dispatch = useDispatch();
+  const handleLoadMore = async () => {
+    getArtistArtFun({ uid: artistuid, lastArt });
+  };
 
   useEffect(() => {
     if (artistuid) {
-      getArtistArtFun({ uid: artistuid });
+      dispatch({ type: CLEAR_ARTIST_ART_LIST });
+      getArtistArtFun({ uid: artistuid, lastArt: [] });
       getArtistProfileFun({ uid: artistuid });
     }
   }, [artistuid]);
-
-  console.log("artistArtList", artistArtList);
 
   return (
     <>
@@ -63,6 +68,9 @@ const ArtistProfileScreen = ({
               ) : null}
             </div>
           </div>
+          <div className="artGallery__btn" onClick={() => handleLoadMore()}>
+            Load More
+          </div>
         </>
       ) : null}
     </>
@@ -72,6 +80,7 @@ const ArtistProfileScreen = ({
 const mapStateToProps = (state) => ({
   artistProfile: state.artistProfile.artistProfile,
   artistArtList: state.artistProfile.artistArtList,
+  lastArt: state.artistProfile.artistLastArt,
 });
 
 const mapDispatchToProps = {
