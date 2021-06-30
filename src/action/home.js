@@ -6,7 +6,9 @@ export const getArtListHomeFun =
   async (dispatch) => {
     console.log("categoryFilter", categoryFilter);
     try {
-      const artList = firestore.collection("art");
+      const artList = firestore
+        .collection("art")
+        .where("isArchive", "==", false);
 
       if (categoryFilter === "") {
         console.log("if 1");

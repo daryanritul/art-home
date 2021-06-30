@@ -22,7 +22,7 @@ const App = () => {
           <Route exact path="/artistscreen">
             <ArtistScreen />
           </Route>
-          <Route exact path="/artistprofilescreen">
+          <Route exact path="/artistprofilescreen/:artistuid">
             <ArtistProfileScreen />
           </Route>
         </Switch>

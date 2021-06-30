@@ -9,12 +9,10 @@ const DisplayArt = ({ item }) => {
         <img src={item.imageUrl} className="artcard__image" />
         <div className="artcard__text">
           <img src={item.artistprofilePicUrl} />
-          <Link href="/artistprofilescreen">{item.artistname}</Link>
+          <Link to={"/artistprofilescreen/" + item.uid}>{item.artistname}</Link>
         </div>
       </div>
-
       {/* MODAL   */}
-
       <div className={`modal ${modalToggle ? "toggle" : ""}`}>
         <div onClick={() => setModalToggle(false)}>
           {item && (
@@ -43,7 +41,6 @@ const DisplayArt = ({ item }) => {
           )}
         </div>
       </div>
-
       {/* MODAL END */}
     </>
   );

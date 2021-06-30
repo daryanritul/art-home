@@ -42,8 +42,6 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
     }
   };
   const handleCategoryClearSelactor = async () => {
-    dispatch({ type: CLEAR_ART_LIST });
-
     setSelector({
       search: null,
       category: "All",
@@ -61,7 +59,8 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
   };
 
   useEffect(() => {
-    console.log("effect");
+    dispatch({ type: CLEAR_ART_LIST });
+
     getArtListHomeFun({ categoryFilter: "", lastArt: {} });
   }, []);
 
