@@ -1,33 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import banner from '../assets/Images/Banner.jpg';
+import banner from "../assets/Images/Banner.jpg";
 
-import artData from '../assets/tempData';
-import profile from '../assets/Images/arts/25.jpg';
+import artData from "../assets/tempData";
+import profile from "../assets/Images/arts/25.jpg";
+import { connect, useDispatch } from "react-redux";
+import { getArtListHomeFun } from "../action/home";
+import { Link } from "react-router-dom";
+import DisplayArt from "../Components/DisplayArt";
+import { CLEAR_ART_LIST } from "../action/action.type";
 
-const HomeScreen = () => {
-  const [modalToggle, setModalToggle] = useState({
-    status: false,
-    data: null,
-  });
+const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
   const [imageList, setImageList] = useState(artData);
   const [search, setSearch] = useState(null);
-  const [selector, setSelector] = useState({ search: search, category: 'All' });
+  const [selector, setSelector] = useState({ search: search, category: "All" });
+  const dispatch = useDispatch();
   const category = [
-    'All',
-    'Painting',
-    'Mandala',
-    'Craft',
-    'Pop Art',
-    'Abstract Art',
-    'Illustration',
-    'Aborignal Art',
-    'Oil Painting',
-    'Sculpture Art',
-    'Sketching',
-    'Polaroids',
-    'Cartoon Art',
+    "All",
+    "Painting",
+    "Mandala",
+    "Craft",
+    "Pop Art",
+    "Abstract Art",
+    "Illustration",
+    "Aborignal Art",
+    "Oil Painting",
+    "Sculpture Art",
+    "Sketching",
+    "Polaroids",
+    "Cartoon Art",
   ];
+
+  const handleCategorySelactor = async ({ item }) => {
+    console.log("ite, ", item);
+    dispatch({ type: CLEAR_ART_LIST });
+    setSelector({ ...selector, category: item });
+    if (item === "All") {
+      getArtListHomeFun({ categoryFilter: "", lastArt: [] });
+    } else {
+      getArtListHomeFun({ categoryFilter: item, lastArt: [] });
+    }
+  };
+  const handleCategoryClearSelactor = async () => {
+    dispatch({ type: CLEAR_ART_LIST });
+
+    setSelector({
+      search: null,
+      category: "All",
+    });
+    getArtListHomeFun({ categoryFilter: "", lastArt: [] });
+  };
+
+  const handleLoadMore = async () => {
+    console.log("load more");
+    if (selector.category === "All") {
+      getArtListHomeFun({ categoryFilter: "", lastArt });
+    } else {
+      getArtListHomeFun({ categoryFilter: selector.category, lastArt });
+    }
+  };
+
+  useEffect(() => {
+    console.log("effect");
+    getArtListHomeFun({ categoryFilter: "", lastArt: {} });
+  }, []);
 
   return (
     <>
@@ -59,7 +95,7 @@ const HomeScreen = () => {
           <input
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             className="searchBar__input"
             placeholder="Search arts by name, artist name and art tags"
           />
@@ -83,10 +119,7 @@ const HomeScreen = () => {
         <div className="category">
           <ul className="list category__list">
             {category.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => setSelector({ ...selector, category: item })}
-              >
+              <li key={index} onClick={() => handleCategorySelactor({ item })}>
                 {item}
               </li>
             ))}
@@ -99,15 +132,7 @@ const HomeScreen = () => {
             {selector.search && <p>{selector.search}</p>}
             <p>{selector.category}</p>
           </div>
-          <p
-            className="clearall"
-            onClick={() =>
-              setSelector({
-                search: null,
-                category: 'All',
-              })
-            }
-          >
+          <p className="clearall" onClick={() => handleCategoryClearSelactor()}>
             clear all
           </p>
         </div>
@@ -117,56 +142,31 @@ const HomeScreen = () => {
 
       <section>
         <div className="artGallery">
-          {imageList.map((item, index) => {
-            return (
-              <div
-                className="artcard"
-                key={index}
-                onClick={() => setModalToggle({ status: true, data: item })}
-              >
-                <img src={item.img} className="artcard__image" />
-                <div className="artcard__text">
-                  <img src={profile} />
-                  <a href="">Captian America</a>
-                </div>
-              </div>
-            );
-          })}
+          {artList.map((item, index) => (
+            <DisplayArt item={item} key={index} />
+          ))}
         </div>
 
-        {/* MODAL   */}
-
-        <div className={`modal ${modalToggle.status ? 'toggle' : ''}`}>
-          <div onClick={() => setModalToggle({ status: false, data: null })}>
-            {modalToggle.data && (
-              <div className="modal__container">
-                <div className="modal__image">
-                  <img src={modalToggle.data.img} />
-                </div>
-                <div className="modal__body">
-                  <img src={modalToggle.data.img} />
-                  <a>{modalToggle.data.artist}</a>
-                  <a>{modalToggle.data.name}</a>
-                </div>
-                <div className="modal__btn">
-                  <p>Compressed Download</p>
-                  <p>Orignal Download</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* MODAL END */}
         <div
           className="artGallery__btn"
           onClick={() => setImageList([...imageList, ...artData])}
         >
-          <p className="load__text ">Load More</p>
+          <button className="load__text " onClick={() => handleLoadMore()}>
+            Load More
+          </button>
         </div>
       </section>
     </>
   );
 };
 
-export default HomeScreen;
+const mapStateToProps = (state) => ({
+  artList: state.home.artList,
+  lastArt: state.home.lastArt,
+});
+
+const mapDispatchToProps = {
+  getArtListHomeFun: (data) => getArtListHomeFun(data),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

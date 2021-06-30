@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import artData from '../assets/tempData';
+import artData from "../assets/tempData";
 
 const ArtistScreen = () => {
   return (
@@ -19,7 +20,7 @@ const ArtistScreen = () => {
                 <p>Total arts : 76</p>
                 <p>Born in 2000</p>
                 <p>Date Started : 03 June 2021</p>
-                <a href="/">Visit Profile</a>
+                <Link to="/artistprofilescreen">Visit Profile</Link>
               </div>
             </div>
           );
