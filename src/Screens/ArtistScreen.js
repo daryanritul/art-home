@@ -5,10 +5,11 @@ import { getArtistListFun } from "../action/artist";
 import { getArtListHomeFun } from "../action/home";
 import artData from "../assets/tempData";
 
-const ArtistScreen = ({ artistList, getArtistListFun }) => {
+const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
   useEffect(() => {
     getArtistListFun();
   }, []);
+  console.log("ERROR", error);
 
   return (
     <>
@@ -40,6 +41,7 @@ const ArtistScreen = ({ artistList, getArtistListFun }) => {
 
 const mapStateToProps = (state) => ({
   artistList: state.artist.artistList,
+  error: state.artist.error,
 });
 
 const mapDispatchToProps = {

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import DisplayArt from "../Components/DisplayArt";
 import { CLEAR_ART_LIST } from "../action/action.type";
 
-const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
+const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
   const [imageList, setImageList] = useState(artData);
   const [search, setSearch] = useState(null);
   const [selector, setSelector] = useState({ search: search, category: "All" });
@@ -31,28 +31,14 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
     "Cartoon Art",
   ];
 
-  const handleCategorySelactor = async ({ item }) => {
-    console.log("ite, ", item);
-    dispatch({ type: CLEAR_ART_LIST });
-    setSelector({ ...selector, category: item });
-    if (item === "All") {
-      getArtListHomeFun({ categoryFilter: "", lastArt: [] });
-    } else {
-      getArtListHomeFun({ categoryFilter: item, lastArt: [] });
-    }
-  };
-  const handleCategoryClearSelactor = async () => {
-    setSelector({
-      search: null,
-      category: "All",
-    });
-    getArtListHomeFun({ categoryFilter: "", lastArt: [] });
-  };
-
   const handleLoadMore = async () => {
-    console.log("load more");
     if (selector.category === "All") {
-      getArtListHomeFun({ categoryFilter: "", lastArt });
+      getArtListHomeFun({
+        search: selector.search,
+        categoryFilter: selector.category,
+        search: selector.search,
+        lastArt,
+      });
     } else {
       getArtListHomeFun({ categoryFilter: selector.category, lastArt });
     }
@@ -60,10 +46,14 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
 
   useEffect(() => {
     dispatch({ type: CLEAR_ART_LIST });
+    getArtListHomeFun({
+      categoryFilter: selector.category,
+      search: selector.search,
+      lastArt: [],
+    });
+  }, [selector]);
 
-    getArtListHomeFun({ categoryFilter: "", lastArt: {} });
-  }, []);
-
+  console.log("ERROR", error);
   return (
     <>
       {/* Hero Section */}
@@ -118,7 +108,10 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
         <div className="category">
           <ul className="list category__list">
             {category.map((item, index) => (
-              <li key={index} onClick={() => handleCategorySelactor({ item })}>
+              <li
+                key={index}
+                onClick={() => setSelector({ ...selector, category: item })}
+              >
                 {item}
               </li>
             ))}
@@ -131,7 +124,15 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
             {selector.search && <p>{selector.search}</p>}
             <p>{selector.category}</p>
           </div>
-          <p className="clearall" onClick={() => handleCategoryClearSelactor()}>
+          <p
+            className="clearall"
+            onClick={() =>
+              setSelector({
+                search: null,
+                category: "All",
+              })
+            }
+          >
             clear all
           </p>
         </div>
@@ -157,6 +158,7 @@ const HomeScreen = ({ artList, lastArt, getArtListHomeFun }) => {
 const mapStateToProps = (state) => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
+  error: state.home.error,
 });
 
 const mapDispatchToProps = {

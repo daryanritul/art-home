@@ -1,12 +1,14 @@
 import {
   ADD_HOME_PAGE_ART,
   CLEAR_ART_LIST,
+  SET_ERROR_HOME,
   SET_LAST_ART,
 } from "../action/action.type";
 
 const initialState = {
   artList: [],
   lastArt: [],
+  error: "",
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +32,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lastArt: action.payload,
+      };
+    case SET_ERROR_HOME:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

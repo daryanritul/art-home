@@ -3,12 +3,14 @@ import {
   SET_ARTIST_ARTLIST,
   SET_ARTIST_LAST_ART,
   SET_ARTIST_PROFILE,
+  SET_ERROR_ARTIST_PROFILE,
 } from "../action/action.type";
 
 const initialState = {
   artistProfile: [],
   artistArtList: [],
   artistLastArt: [],
+  error: "",
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +39,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         artistLastArt: action.payload,
+      };
+
+    case SET_ERROR_ARTIST_PROFILE:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

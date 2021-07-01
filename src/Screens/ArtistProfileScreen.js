@@ -4,19 +4,18 @@ import { connect, useDispatch } from "react-redux";
 import { getArtistProfileFun, getArtistArtFun } from "../action/artistProfile";
 import DisplayArt from "../Components/DisplayArt";
 
-import artist from "../assets/Images/arts/6.jpg";
-
-import artData from "../assets/tempData";
-import profile from "../assets/Images/arts/25.jpg";
-
 import insta from "../assets/Images/insta.svg";
 import facebook from "../assets/Images/facebook.svg";
 import { useParams } from "react-router-dom";
-import { CLEAR_ARTIST_ART_LIST } from "../action/action.type";
+import {
+  CLEAR_ARTIST_ART_LIST,
+  SET_ERROR_ARTIST_PROFILE,
+} from "../action/action.type";
 
 const ArtistProfileScreen = ({
   artistProfile,
   lastArt,
+  error,
   artistArtList,
   getArtistArtFun,
   getArtistProfileFun,
@@ -32,8 +31,11 @@ const ArtistProfileScreen = ({
       dispatch({ type: CLEAR_ARTIST_ART_LIST });
       getArtistArtFun({ uid: artistuid, lastArt: [] });
       getArtistProfileFun({ uid: artistuid });
+    } else {
+      dispatch({ type: SET_ERROR_ARTIST_PROFILE, payload: "NO UID FPOUND" });
     }
   }, [artistuid]);
+  console.log("ERROR", error);
 
   return (
     <>
@@ -81,6 +83,7 @@ const mapStateToProps = (state) => ({
   artistProfile: state.artistProfile.artistProfile,
   artistArtList: state.artistProfile.artistArtList,
   lastArt: state.artistProfile.artistLastArt,
+  error: state.artistProfile.error,
 });
 
 const mapDispatchToProps = {
