@@ -4,7 +4,7 @@ import logo from '../assets/Images/logo.svg';
 const Footer = () => {
   return (
     <div className="footer-box">
-      <img className="brand" src={logo} alt="" />
+      {/* <img className="brand" src={logo} alt="" /> */}
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut.

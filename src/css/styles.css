@@ -10,7 +10,7 @@
 }
 
 /* Navbar Hamburger Button*/
-
+/* 
 .menu-btn {
   position: relative;
   width: 45px;
@@ -57,10 +57,10 @@
   .menu-btn {
     display: flex;
   }
-}
+} */
 
 /* Navbar */
-.nav {
+/* .nav {
   background: var(--color-white);
   display: flex;
   justify-content: space-between;
@@ -195,10 +195,10 @@
 .button.btn--light:hover {
   color: var(--color-primary);
   background-color: var(--color-secondry);
-}
+} */
 
 /* Hero Banner  */
-
+/* 
 .banner {
   background: var(--color-white);
   display: flex;
@@ -231,10 +231,10 @@
   .banner__img {
     display: none;
   }
-}
+} */
 
 /* Explore Art */
-.art-title {
+/* .art-title {
   margin: 0;
   padding: 1rem;
   color: var(--color-secondry);
@@ -279,10 +279,10 @@
 }
 .searchBar__input:focus {
   outline: none;
-}
+} */
 
 /* category */
-
+/* 
 .category {
   margin: 5rem;
 }
@@ -303,10 +303,10 @@
 }
 .category__list li:hover {
   background: var(--color-primary);
-}
+} */
 
 /* Reasil Dusplay */
-
+/* 
 .result {
   display: flex;
   margin: 0 10%;
@@ -369,17 +369,17 @@
   .clearall {
     position: relative;
   }
-}
+} */
 /* Gallery  */
-.artGallery {
+/* .artGallery {
   column-count: 3;
   column-width: 33%;
   gap: 1rem;
   margin: 5rem 10rem;
   transition: all 0.3s ease;
-}
+} */
 
-.artcard__image {
+/* .artcard__image {
   width: 100%;
   padding: 0;
   transition: all 340ms ease;
@@ -432,8 +432,8 @@
 }
 .artcard__text a:hover {
   color: #fff;
-}
-@media screen and (max-width: 950px) {
+} */
+/* @media screen and (max-width: 950px) {
   .artGallery {
     column-count: 2;
     column-width: 50%;
@@ -446,7 +446,7 @@
     column-width: 100%;
     margin: 5rem 1rem;
   }
-}
+} */
 
 /* Load BUtton css */
 .artGallery__btn {
@@ -469,7 +469,7 @@
 }
 
 /* Art Modal */
-
+/* 
 .modal {
   width: 100%;
   height: 100vh;
@@ -558,7 +558,7 @@
     top: auto;
     bottom: 0;
   }
-}
+} */
 
 /* /footer */
 .footer-box {
