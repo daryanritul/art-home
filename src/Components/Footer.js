@@ -1,33 +1,34 @@
 import React from 'react';
 import logo from '../assets/Images/logo.svg';
 
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
-    <div className="footer-box">
-      {/* <img className="brand" src={logo} alt="" /> */}
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut.
-      </p>
-      <div className="footer__divider"></div>
-
-      <ul className="footer-list">
-        <li className="list__items">
-          <a href=""></a>Arts
-        </li>
-        <li className="list__items">
-          <a href=""></a>Artists
-        </li>
-        <li className="list__items">
-          <a href=""></a>About
-        </li>
-        <li className="list__items">
-          <a href=""></a>Contact
-        </li>
-        <li className="list__items">
-          <a href=""></a>Sign In
-        </li>
-      </ul>
+    <div className="footer">
+      <div className="divider"></div>
+      <div className="container">
+        <div className="col">
+          <Link>Arts</Link>
+          <Link>Artists</Link>
+          <Link>About Us</Link>
+          <Link>Contact Us</Link>
+        </div>
+        <div className="col">
+          <Link>
+            Artist <span> Login </span>
+          </Link>
+          <Link>
+            New Artist?<span> Register </span>
+          </Link>
+        </div>
+        <div className="col detail">
+          <img src={logo} />
+          <p>Explore, Search , Download Arts from various Artists</p>
+        </div>
+      </div>
+      <div className="divider"></div>
+      <p>@arthomegallery.com</p>
     </div>
   );
 };

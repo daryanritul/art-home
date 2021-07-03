@@ -449,7 +449,7 @@
 } */
 
 /* Load BUtton css */
-.artGallery__btn {
+/* .artGallery__btn {
   text-align: center;
   margin: 3rem;
   width: max-content;
@@ -466,7 +466,7 @@
 }
 .artGallery__btn:hover {
   transform: scale(1.1);
-}
+} */
 
 /* Art Modal */
 /* 
@@ -561,7 +561,7 @@
 } */
 
 /* /footer */
-.footer-box {
+/* .footer-box {
   background: var(--color-secondry);
   color: var(--color-white);
   display: flex;
@@ -602,7 +602,7 @@
   .footer-box p {
     width: 100%;
   }
-}
+} */
 
 /* Artist page Is Here */
 

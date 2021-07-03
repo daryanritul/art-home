@@ -41,7 +41,7 @@
 		outline: none;
 	}
 	.icon{
-        font-size: clamp(3.7rem, 2.4vw, 8rem);
+        font-size: clamp(3.7rem, 2.4vw, 8rem); 
         color : $color-5;
         padding : 3px;
         width: 20%;
@@ -189,3 +189,24 @@
       
     }
   }
+
+  .load-more {
+    text-align: center;
+    margin: 3rem;
+    width: max-content;
+    margin: 3rem auto;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    background: $color-1;
+    border : 2px solid $color-5;
+    transition: all 100ms ease;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    &:hover {
+        background: $color-5;
+    border : 2px solid $color-1;
+    color : #fff;
+      }
+  }
+  

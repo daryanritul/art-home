@@ -11,7 +11,7 @@ const NavBar = () => {
         <img src={logo} alt="" />
       </Link>
 
-      <ul className="list nav__list toggler__content">
+      <ul className="nav__list">
         <li>
           <Link to="/">Arts</Link>
         </li>

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import banner from '../assets/Images/Banner.jpg';
 import { IoIosSearch } from 'react-icons/io';
 
-import artData from '../assets/tempData';
-import profile from '../assets/Images/arts/25.jpg';
 import { connect, useDispatch } from 'react-redux';
 import { getArtListHomeFun } from '../action/home';
 import { Link } from 'react-router-dom';
@@ -86,7 +83,7 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
       {/* Search bar */}
 
       <div className="search">
-        <h2>Lorem Ispum, truf sd shhe afgt ssd</h2>
+        <h2>Explore, Search & Download Free Arts</h2>
         <div className="search-bar">
           <input
             type="text"
@@ -106,8 +103,8 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
           />
         </div>
         <p>
-          Laboris est esse cupidatat aute.Laboris labore sunt consequat laboris
-          ea sunt quis tempor.
+          Search any arts by name, tags and filter by category, visit artists
+          and much more.
         </p>
       </div>
 
@@ -156,8 +153,8 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
             </div>
           </div>
         ))}
-        <div className="artGallery__btn" onClick={() => handleLoadMore()}>
-          Load More
+        <div className="load-more" onClick={() => handleLoadMore()}>
+          View More Arts
         </div>
       </section>
     </>
