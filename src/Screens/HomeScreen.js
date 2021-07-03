@@ -33,7 +33,7 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
 
   const handleLoadMore = async () => {
     if (selector.category === 'All') {
-      getArtListHomeFun({
+      await getArtListHomeFun({
         search: selector.search,
         categoryFilter: selector.category,
         search: selector.search,
@@ -57,15 +57,20 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
   //       window.removeEventListener('scroll', handleScroll);
   //     };
   //   }, []);
-
-  //   if (
-  //     Math.trunc(scrollPosition) ===
+  //   console.log(
+  //     Math.round(scrollPosition),
+  //     ' >=',
   //     document.body.offsetHeight - window.innerHeight
-  //   ) {
-  //     handleLoadMore();
-  //     console.log('END IS HERE');
-
-  //   }
+  //   );
+  //   useEffect(() => {
+  //     if (
+  //       Math.round(scrollPosition) >=
+  //       document.body.offsetHeight - window.innerHeight
+  //     ) {
+  //       handleLoadMore();
+  //       console.log('Hi From ENd');
+  //     }
+  //   }, [scrollPosition]);
 
   useEffect(() => {
     dispatch({ type: CLEAR_ART_LIST });
