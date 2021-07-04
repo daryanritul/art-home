@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getArtistListFun } from "../action/artist";
-import { getArtListHomeFun } from "../action/home";
-import artData from "../assets/tempData";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getArtistListFun } from '../action/artist';
+import { getArtListHomeFun } from '../action/home';
+import artData from '../assets/tempData';
 
 const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
   useEffect(() => {
     getArtistListFun();
   }, []);
-  console.log("ERROR", error);
+  console.log('ERROR', error);
 
   return (
-    <>
+    <section className="artistsProfiles">
       {/* Page Heading */}
       <div className="pageTitle">
         <h2>artists</h2>
@@ -20,32 +20,36 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
       <div className="artists">
         {artistList.map((item, index) => {
           return (
-            <div className="artist-card" key={index}>
-              <img src={item.profilePicUrl} className="artist__image" />
-              <div className="artist__data">
+            <div className="card" key={index}>
+              <div class="card__image">
+                <img src={item.profilePicUrl} />
+              </div>
+              <div class="card__name">
                 <p>{item.name}</p>
-                <p>Total arts : Comming Soon </p>
-                <p>Born in {item.dateOfBirth}</p>
-                <p>Date Started : {item.dateStarted}</p>
-                <Link to={"/artistprofilescreen/" + item.uid}>
-                  Visit Profile
+              </div>
+              <p>Total Arts : Comming Soon</p>
+              <p>Born in {item.dateOfBirth}</p>
+              <p>Date Started : {item.dateStarted}</p>
+              <div class="card__button">
+                <Link to={'/artistprofilescreen/' + item.uid}>
+                  <p>Visit Profile</p>
                 </Link>
               </div>
             </div>
           );
         })}
       </div>
-    </>
+    </section>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artistList: state.artist.artistList,
   error: state.artist.error,
 });
 
 const mapDispatchToProps = {
-  getArtistListFun: (data) => getArtistListFun(data),
+  getArtistListFun: data => getArtistListFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistScreen);

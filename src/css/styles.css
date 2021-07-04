@@ -606,7 +606,7 @@
 
 /* Artist page Is Here */
 
-.pageTitle {
+/* .pageTitle {
   background: var(--color-white);
   padding: 1.8rem 0;
 }
@@ -623,8 +623,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-.artist-card {
+} */
+/* .artist-card {
   width: 35rem;
   height: 42rem;
   background: var(--color-white);
@@ -672,7 +672,7 @@
 }
 .artist-card:hover {
   filter: opacity(0.9);
-}
+} */
 
 /* Artist Profile Screwen CSS */
 
