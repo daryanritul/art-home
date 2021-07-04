@@ -1,20 +1,21 @@
-import React from "react";
-import "./css/styles.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import './css/styles.css';
+import './css/index.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Footer from "./Components/Footer";
-import NavBar from "./Components/NavBar";
-import ArtistProfileScreen from "./Screens/ArtistProfileScreen";
-import ArtistScreen from "./Screens/ArtistScreen";
+import Footer from './Components/Footer';
+import NavBar from './Components/NavBar';
+import ArtistProfileScreen from './Screens/ArtistProfileScreen';
+import ArtistScreen from './Screens/ArtistScreen';
 
-import HomeScreen from "./Screens/HomeScreen";
+import HomeScreen from './Screens/HomeScreen';
+import ContactUsScreen from './Screens/ContactUsScreen';
 
 const App = () => {
   return (
     <>
       <Router>
         <NavBar />
-
         <Switch>
           <Route exact path="/">
             <HomeScreen />
@@ -24,6 +25,9 @@ const App = () => {
           </Route>
           <Route exact path="/artistprofilescreen/:artistuid">
             <ArtistProfileScreen />
+          </Route>
+          <Route exact path="/contactscreen">
+            <ContactUsScreen />
           </Route>
         </Switch>
         <Footer />
