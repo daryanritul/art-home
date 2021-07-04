@@ -142,6 +142,11 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
       </div>
 
       {/* Art Section */}
+      {error && (
+        <div className="errorBox">
+          <p>{error}</p>
+        </div>
+      )}
 
       <section>
         {artList.map((itemData, index) => (

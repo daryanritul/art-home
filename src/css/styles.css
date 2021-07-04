@@ -676,9 +676,8 @@
 
 /* Artist Profile Screwen CSS */
 
-.profileCard {
+/* .profileCard {
   display: flex;
-  /* background: grey; */
   justify-content: center;
   padding: 3rem 1rem;
 }
@@ -734,4 +733,4 @@
 .social_links img {
   padding: 2rem;
   cursor: pointer;
-}
+} */

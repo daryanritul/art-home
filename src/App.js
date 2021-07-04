@@ -9,13 +9,13 @@ import ArtistProfileScreen from './Screens/ArtistProfileScreen';
 import ArtistScreen from './Screens/ArtistScreen';
 
 import HomeScreen from './Screens/HomeScreen';
+import ContactUsScreen from './Screens/ContactUsScreen';
 
 const App = () => {
   return (
     <>
       <Router>
         <NavBar />
-
         <Switch>
           <Route exact path="/">
             <HomeScreen />
@@ -25,6 +25,9 @@ const App = () => {
           </Route>
           <Route exact path="/artistprofilescreen/:artistuid">
             <ArtistProfileScreen />
+          </Route>
+          <Route exact path="/contactscreen">
+            <ContactUsScreen />
           </Route>
         </Switch>
         <Footer />

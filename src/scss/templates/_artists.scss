@@ -9,9 +9,8 @@
     flex-wrap: wrap;
   }
   .pageTitle {
-    background: var(--color-white);
+    background: $color-1;
     padding: 1.8rem 0;
-    border-top : 1px solid $color-5;
     h2 {
         text-transform: uppercase;
         text-align: center;
@@ -36,7 +35,7 @@
 			object-fit: cover;
 			box-shadow: -7px 6px 13px -1px rgba(40, 40, 40, 0.55);
             transform: translate(1rem,-1.5rem);
-			transition: all 0.5s ease;
+			transition: transform 0.5s ease;
 		}
 		img:hover {
 			transform:translate(1rem,-1.5rem)  scale(1.05);
@@ -66,14 +65,13 @@
 		padding: 1rem;
 		cursor: pointer;
 		box-shadow: -7px 6px 13px -1px rgba(40, 40, 40, 0.55);
-		transition: all 0.3s ease;
 		p {
 			font-size: 1.8rem;
 			padding: 0;
 		}
 	}
 	&__button:hover {
-		transform: scale(1.05);
+	
 		background-color: $color-5;
 		color: $color-1;
 	}

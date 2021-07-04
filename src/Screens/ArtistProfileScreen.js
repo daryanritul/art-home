@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 
-import { getArtistProfileFun, getArtistArtFun } from "../action/artistProfile";
-import DisplayArt from "../Components/DisplayArt";
+import { getArtistProfileFun, getArtistArtFun } from '../action/artistProfile';
+import DisplayArt from '../Components/DisplayArt';
 
-import insta from "../assets/Images/insta.svg";
-import facebook from "../assets/Images/facebook.svg";
-import { useParams } from "react-router-dom";
+import insta from '../assets/Images/insta.svg';
+import facebook from '../assets/Images/facebook.svg';
+import { useParams } from 'react-router-dom';
 import {
   CLEAR_ARTIST_ART_LIST,
   SET_ERROR_ARTIST_PROFILE,
-} from "../action/action.type";
+} from '../action/action.type';
 
 const ArtistProfileScreen = ({
   artistProfile,
@@ -32,10 +32,10 @@ const ArtistProfileScreen = ({
       getArtistArtFun({ uid: artistuid, lastArt: [] });
       getArtistProfileFun({ uid: artistuid });
     } else {
-      dispatch({ type: SET_ERROR_ARTIST_PROFILE, payload: "NO UID FPOUND" });
+      dispatch({ type: SET_ERROR_ARTIST_PROFILE, payload: 'NO UID FPOUND' });
     }
   }, [artistuid]);
-  console.log("ERROR", error);
+  console.log('ERROR', error);
 
   return (
     <>
@@ -60,18 +60,19 @@ const ArtistProfileScreen = ({
           </div>
           <div className="pageTitle">
             <h2>MY ARTS</h2>
-            <div className="artGallery">
-              {artistArtList.length ? (
-                <>
-                  {artistArtList.map((item, index) => (
-                    <DisplayArt item={item} key={index} />
-                  ))}
-                </>
-              ) : null}
-            </div>
           </div>
-          <div className="artGallery__btn" onClick={() => handleLoadMore()}>
-            Load More
+          <div className="artGallery">
+            {artistArtList.length ? (
+              <>
+                {artistArtList.map((item, index) => (
+                  <DisplayArt item={item} key={index} />
+                ))}
+              </>
+            ) : null}
+          </div>
+
+          <div className="load-more" onClick={() => handleLoadMore()}>
+            View More Arts
           </div>
         </>
       ) : null}
@@ -79,7 +80,7 @@ const ArtistProfileScreen = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artistProfile: state.artistProfile.artistProfile,
   artistArtList: state.artistProfile.artistArtList,
   lastArt: state.artistProfile.artistLastArt,
@@ -87,8 +88,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getArtistProfileFun: (data) => getArtistProfileFun(data),
-  getArtistArtFun: (data) => getArtistArtFun(data),
+  getArtistProfileFun: data => getArtistProfileFun(data),
+  getArtistArtFun: data => getArtistArtFun(data),
 };
 
 export default connect(

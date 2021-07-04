@@ -18,11 +18,11 @@ const NavBar = () => {
         <li>
           <Link to="/artistscreen">Artists</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/artistscreen">About</Link>
-        </li>
+        </li> */}
         <li>
-          <Link to="/artistscreen">Contact</Link>
+          <Link to="/contactscreen">Contact</Link>
         </li>
         <span>
           <li>
