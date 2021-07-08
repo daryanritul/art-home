@@ -1,44 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { IoIosSearch } from 'react-icons/io';
+import { IoIosSearch } from "react-icons/io";
 
-import { connect, useDispatch } from 'react-redux';
-import { getArtListHomeFun } from '../action/home';
-import { Link } from 'react-router-dom';
-import DisplayArt from '../Components/DisplayArt';
-import { CLEAR_ART_LIST } from '../action/action.type';
+import { connect, useDispatch } from "react-redux";
+import { getArtListHomeFun } from "../action/home";
+import DisplayArt from "../Components/DisplayArt";
+import { CLEAR_ART_LIST } from "../action/action.type";
 
 const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
-  const [search, setSearch] = useState(null);
-  const [selector, setSelector] = useState({ search: search, category: 'All' });
+  const [search, setSearch] = useState("");
+  const [selector, setSelector] = useState({ search: search, category: "All" });
   const dispatch = useDispatch();
   const category = [
-    'All',
-    'Painting',
-    'Mandala',
-    'Craft',
-    'Pop Art',
-    'Abstract Art',
-    'Illustration',
-    'Aborignal Art',
-    'Oil Painting',
-    'Sculpture Art',
-    'Sketching',
-    'Polaroids',
-    'Cartoon Art',
+    "All",
+    "Painting",
+    "Mandala",
+    "Craft",
+    "Pop Art",
+    "Abstract Art",
+    "Illustration",
+    "Aborignal Art",
+    "Oil Painting",
+    "Sculpture Art",
+    "Sketching",
+    "Polaroids",
+    "Cartoon Art",
   ];
 
   const handleLoadMore = async () => {
-    if (selector.category === 'All') {
-      await getArtListHomeFun({
-        search: selector.search,
-        categoryFilter: selector.category,
-        search: selector.search,
-        lastArt,
-      });
-    } else {
-      getArtListHomeFun({ categoryFilter: selector.category, lastArt });
-    }
+    await getArtListHomeFun({
+      search: selector.search,
+      categoryFilter: selector.category,
+      search: selector.search,
+      lastArt,
+    });
   };
   //   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -88,7 +83,7 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
           <input
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Serarch for arts here"
           />
           <IoIosSearch
@@ -133,7 +128,7 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
           onClick={() =>
             setSelector({
               search: null,
-              category: 'All',
+              category: "All",
             })
           }
         >
@@ -142,11 +137,6 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
       </div>
 
       {/* Art Section */}
-      {error && (
-        <div className="errorBox">
-          <p>{error}</p>
-        </div>
-      )}
 
       <section>
         {artList.map((itemData, index) => (
@@ -158,22 +148,29 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
             </div>
           </div>
         ))}
-        <div className="load-more" onClick={() => handleLoadMore()}>
-          View More Arts
-        </div>
+
+        {error ? (
+          <div className="errorBox">
+            <p>{error}</p>
+          </div>
+        ) : (
+          <div className="load-more" onClick={() => handleLoadMore()}>
+            View More Arts
+          </div>
+        )}
       </section>
     </>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
   error: state.home.error,
 });
 
 const mapDispatchToProps = {
-  getArtListHomeFun: data => getArtListHomeFun(data),
+  getArtListHomeFun: (data) => getArtListHomeFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
