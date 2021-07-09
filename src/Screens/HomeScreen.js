@@ -65,7 +65,7 @@ const HomeScreen = ({
     if (
       !isLoading &&
       Math.round(scrollPosition) >=
-        document.body.offsetHeight - window.innerHeight
+        document.body.offsetHeight - window.innerHeight - 500
     ) {
       dispatch({ type: SET_IS_LOADING_HOME, payload: true });
 

@@ -27,7 +27,7 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
               <div class="card__name">
                 <p>{item.name}</p>
               </div>
-              <p>Total Arts : Comming Soon</p>
+              <p>Total Arts : {item.totalArt}</p>
               <p>Born in {item.dateOfBirth}</p>
               <p>Date Started : {item.dateStarted}</p>
               <div class="card__button">
@@ -43,13 +43,13 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   artistList: state.artist.artistList,
   error: state.artist.error,
 });
 
 const mapDispatchToProps = {
-  getArtistListFun: data => getArtistListFun(data),
+  getArtistListFun: (data) => getArtistListFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistScreen);

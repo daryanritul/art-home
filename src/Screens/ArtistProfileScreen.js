@@ -47,7 +47,7 @@ const ArtistProfileScreen = ({
           <div className="profileCard">
             <img className="profile__image" src={artistProfile.profilePicUrl} />
             <div className="profile__data">
-              <p>Total arts : Comming Soon</p>
+              <p>Total arts : {artistProfile.totalArt}</p>
               <p>Born in {artistProfile.dateOfBirth}</p>
               <p>Date Started : {artistProfile.dateStarted}</p>
               <p>Bio </p>
@@ -80,7 +80,7 @@ const ArtistProfileScreen = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   artistProfile: state.artistProfile.artistProfile,
   artistArtList: state.artistProfile.artistArtList,
   lastArt: state.artistProfile.artistLastArt,
@@ -88,8 +88,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getArtistProfileFun: data => getArtistProfileFun(data),
-  getArtistArtFun: data => getArtistArtFun(data),
+  getArtistProfileFun: (data) => getArtistProfileFun(data),
+  getArtistArtFun: (data) => getArtistArtFun(data),
 };
 
 export default connect(
