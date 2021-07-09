@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { IoIosSearch } from "react-icons/io";
+import { IoIosSearch } from 'react-icons/io';
 
-import { connect, useDispatch } from "react-redux";
-import { getArtListHomeFun } from "../action/home";
-import DisplayArt from "../Components/DisplayArt";
-import { CLEAR_ART_LIST } from "../action/action.type";
+import { connect, useDispatch } from 'react-redux';
+import { getArtListHomeFun } from '../action/home';
+import DisplayArt from '../Components/DisplayArt';
+import { CLEAR_ART_LIST, SET_IS_LOADING_HOME } from '../action/action.type';
 
-const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
-  const [search, setSearch] = useState("");
-  const [selector, setSelector] = useState({ search: search, category: "All" });
+const HomeScreen = ({
+  artList,
+  error,
+  lastArt,
+  isLoading,
+  getArtListHomeFun,
+}) => {
+  const [search, setSearch] = useState('');
+  const [selector, setSelector] = useState({ search: search, category: 'All' });
   const dispatch = useDispatch();
   const category = [
-    "All",
-    "Painting",
-    "Mandala",
-    "Craft",
-    "Pop Art",
-    "Abstract Art",
-    "Illustration",
-    "Aborignal Art",
-    "Oil Painting",
-    "Sculpture Art",
-    "Sketching",
-    "Polaroids",
-    "Cartoon Art",
+    'All',
+    'Painting',
+    'Mandala',
+    'Craft',
+    'Pop Art',
+    'Abstract Art',
+    'Illustration',
+    'Aborignal Art',
+    'Oil Painting',
+    'Sculpture Art',
+    'Sketching',
+    'Polaroids',
+    'Cartoon Art',
   ];
 
   const handleLoadMore = async () => {
@@ -35,37 +41,42 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
       lastArt,
     });
   };
-  //   const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-  //   const handleScroll = () => {
-  //     const position = window.pageYOffset;
-  //     setScrollPosition(position);
-  //   };
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
 
-  //   useEffect(() => {
-  //     window.addEventListener('scroll', handleScroll, { passive: true });
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
-  //     return () => {
-  //       window.removeEventListener('scroll', handleScroll);
-  //     };
-  //   }, []);
-  //   console.log(
-  //     Math.round(scrollPosition),
-  //     ' >=',
-  //     document.body.offsetHeight - window.innerHeight
-  //   );
-  //   useEffect(() => {
-  //     if (
-  //       Math.round(scrollPosition) >=
-  //       document.body.offsetHeight - window.innerHeight
-  //     ) {
-  //       handleLoadMore();
-  //       console.log('Hi From ENd');
-  //     }
-  //   }, [scrollPosition]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  console.log(
+    Math.round(scrollPosition),
+    ' >=',
+    document.body.offsetHeight - window.innerHeight
+  );
+
+  useEffect(() => {
+    if (
+      !isLoading &&
+      Math.round(scrollPosition) >=
+        document.body.offsetHeight - window.innerHeight
+    ) {
+      dispatch({ type: SET_IS_LOADING_HOME, payload: true });
+
+      handleLoadMore();
+      console.log('Hi From ENd');
+    }
+  }, [scrollPosition]);
 
   useEffect(() => {
     dispatch({ type: CLEAR_ART_LIST });
+    dispatch({ type: SET_IS_LOADING_HOME, payload: true });
     getArtListHomeFun({
       categoryFilter: selector.category,
       search: selector.search,
@@ -128,7 +139,7 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
           onClick={() =>
             setSelector({
               search: null,
-              category: "All",
+              category: 'All',
             })
           }
         >
@@ -139,15 +150,37 @@ const HomeScreen = ({ artList, error, lastArt, getArtListHomeFun }) => {
       {/* Art Section */}
 
       <section>
-        {artList.map((itemData, index) => (
-          <div key={index}>
-            <div className="artGallery">
-              {itemData.map((item, index) => (
-                <DisplayArt item={item} key={index} />
-              ))}
-            </div>
+        {/* <div className="artGallery">
+          {artList.map((item, index) => (
+            <DisplayArt item={item} key={index} />
+          ))}
+        </div> */}
+
+        {/* TODO:  Ui work to be done        */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            marginRight: '15px',
+            marginLeft: '15px',
+          }}
+        >
+          <div style={{ width: '33%' }}>
+            {artList.col1.map((item, index) => (
+              <DisplayArt item={item} key={index} />
+            ))}
           </div>
-        ))}
+          <div style={{ width: '33%' }}>
+            {artList.col2.map((item, index) => (
+              <DisplayArt item={item} key={index} />
+            ))}
+          </div>
+          <div style={{ width: '33%' }}>
+            {artList.col3.map((item, index) => (
+              <DisplayArt item={item} key={index} />
+            ))}
+          </div>
+        </div>
 
         {error ? (
           <div className="errorBox">
@@ -167,6 +200,7 @@ const mapStateToProps = (state) => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
   error: state.home.error,
+  isLoading: state.home.isLoading,
 });
 
 const mapDispatchToProps = {
