@@ -156,7 +156,7 @@ const HomeScreen = ({
           ))}
         </div> */}
 
-        {/* TODO:  Ui work to be done        */}
+        {/* TODO:  Ui work to be done */}
         <div
           style={{
             display: 'flex',

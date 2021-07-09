@@ -6,6 +6,7 @@ import DisplayArt from '../Components/DisplayArt';
 
 import insta from '../assets/Images/insta.svg';
 import facebook from '../assets/Images/facebook.svg';
+import twitter from '../assets/Images/twitter.svg';
 import { useParams } from 'react-router-dom';
 import {
   CLEAR_ARTIST_ART_LIST,
@@ -36,6 +37,7 @@ const ArtistProfileScreen = ({
     }
   }, [artistuid]);
   console.log('ERROR', error);
+  console.log('artistProfile.social', artistProfile.social);
 
   return (
     <>
@@ -53,8 +55,27 @@ const ArtistProfileScreen = ({
               <p>Bio </p>
               <p>{artistProfile.bio}</p>
               <div className="social_links">
-                <img src={insta} />
-                <img src={facebook} />
+                {artistProfile.social.map((social, index) => {
+                  if (social.socialProviderName === 'Instagram') {
+                    return (
+                      <a href={social.socialLink} target="_blank">
+                        <img src={insta} alt="Instagram" />
+                      </a>
+                    );
+                  } else if (social.socialProviderName === 'Facebook') {
+                    return (
+                      <a href={social.socialLink} target="_blank">
+                        <img src={facebook} alt="Facebook" />
+                      </a>
+                    );
+                  } else if (social.socialProviderName === 'Twitter') {
+                    return (
+                      <a href={social.socialLink} target="_blank">
+                        <img src={twitter} alt="Twitter" />
+                      </a>
+                    );
+                  }
+                })}
               </div>
             </div>
           </div>
