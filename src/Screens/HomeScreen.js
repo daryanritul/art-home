@@ -37,7 +37,7 @@ const HomeScreen = ({
     await getArtListHomeFun({
       search: selector.search,
       categoryFilter: selector.category,
-      search: selector.search,
+      search: selector.search.toLowerCase(),
       lastArt,
     });
   };
@@ -55,11 +55,11 @@ const HomeScreen = ({
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  console.log(
-    Math.round(scrollPosition),
-    ' >=',
-    document.body.offsetHeight - window.innerHeight
-  );
+  // console.log(
+  //   Math.round(scrollPosition),
+  //   ' >=',
+  //   document.body.offsetHeight - window.innerHeight
+  // );
 
   useEffect(() => {
     if (
@@ -79,7 +79,7 @@ const HomeScreen = ({
     dispatch({ type: SET_IS_LOADING_HOME, payload: true });
     getArtListHomeFun({
       categoryFilter: selector.category,
-      search: selector.search,
+      search: selector.search.toLowerCase(),
       lastArt: [],
     });
   }, [selector]);
@@ -138,7 +138,7 @@ const HomeScreen = ({
           className="result__clear"
           onClick={() =>
             setSelector({
-              search: null,
+              search: '',
               category: 'All',
             })
           }

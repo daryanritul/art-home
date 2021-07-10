@@ -55,27 +55,28 @@ const ArtistProfileScreen = ({
               <p>Bio </p>
               <p>{artistProfile.bio}</p>
               <div className="social_links">
-                {artistProfile.social.map((social, index) => {
-                  if (social.socialProviderName === 'Instagram') {
-                    return (
-                      <a href={social.socialLink} target="_blank">
-                        <img src={insta} alt="Instagram" />
-                      </a>
-                    );
-                  } else if (social.socialProviderName === 'Facebook') {
-                    return (
-                      <a href={social.socialLink} target="_blank">
-                        <img src={facebook} alt="Facebook" />
-                      </a>
-                    );
-                  } else if (social.socialProviderName === 'Twitter') {
-                    return (
-                      <a href={social.socialLink} target="_blank">
-                        <img src={twitter} alt="Twitter" />
-                      </a>
-                    );
-                  }
-                })}
+                {artistProfile.social &&
+                  artistProfile.social.map((social, index) => {
+                    if (social.socialProviderName === 'Instagram') {
+                      return (
+                        <a href={social.socialLink} target="_blank">
+                          <img src={insta} alt="Instagram" />
+                        </a>
+                      );
+                    } else if (social.socialProviderName === 'Facebook') {
+                      return (
+                        <a href={social.socialLink} target="_blank">
+                          <img src={facebook} alt="Facebook" />
+                        </a>
+                      );
+                    } else if (social.socialProviderName === 'Twitter') {
+                      return (
+                        <a href={social.socialLink} target="_blank">
+                          <img src={twitter} alt="Twitter" />
+                        </a>
+                      );
+                    }
+                  })}
               </div>
             </div>
           </div>
