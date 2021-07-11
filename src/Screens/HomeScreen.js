@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
-import { IoIosSearch } from 'react-icons/io';
+import { IoIosSearch, IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 import { connect, useDispatch } from 'react-redux';
 import { getArtListHomeFun } from '../action/home';
@@ -21,6 +21,7 @@ const HomeScreen = ({
     status: false,
     data: null,
   });
+  const ref = useRef();
   const dispatch = useDispatch();
   const category = [
     'All',
@@ -89,6 +90,10 @@ const HomeScreen = ({
     });
   }, [selector]);
 
+  const scrollYHandler = scrollNum => {
+    ref.current.scrollLeft += scrollNum;
+  };
+
   return (
     <>
       {/* Search bar */}
@@ -121,7 +126,13 @@ const HomeScreen = ({
 
       {/* Catregories Section */}
       <div className="category">
-        <ul className="category__list">
+        <IoIosArrowBack
+          className="category__button"
+          onClick={() => {
+            scrollYHandler(-200);
+          }}
+        />
+        <ul className="category__list" ref={ref}>
           {category.map((item, index) => (
             <li
               key={index}
@@ -131,6 +142,12 @@ const HomeScreen = ({
             </li>
           ))}
         </ul>
+        <IoIosArrowForward
+          className="category__button"
+          onClick={() => {
+            scrollYHandler(200);
+          }}
+        />
       </div>
 
       <div className="result">

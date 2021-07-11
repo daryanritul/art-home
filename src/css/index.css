@@ -264,19 +264,35 @@ ul {
 }
 
 .category {
-  overflow-y: scroll;
   background: #F2F2EE;
-  scrollbar-width: none;
   position: sticky;
   z-index: 99;
   border-top: 2px solid #fff;
   top: 7rem;
+  display: flex;
+  justify-content: space-between;
+}
+.category__button {
+  border: 0;
+  padding: 10px;
+  font-weight: bold;
+  width: 6rem;
+  height: 6rem;
+}
+.category__button:hover {
+  background: #3C363A;
+  color: #F2F2EE;
 }
 .category__list {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   border-bottom: 0px solid #3C363A;
   margin: 0;
   padding: 0;
@@ -294,7 +310,7 @@ ul {
   color: #F2F2EE;
   background: #3C363A;
 }
-.category::-webkit-scrollbar {
+.category__list::-webkit-scrollbar {
   display: none;
 }
 
