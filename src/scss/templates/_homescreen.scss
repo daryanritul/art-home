@@ -53,18 +53,35 @@
 }
 
 .category {
-  overflow-y: scroll;
   background: $color-1;
-  scrollbar-width: none;
   position: sticky;
   z-index: 99;
   border-top: 2px solid #fff;
   top: 7rem;
+  display: flex;
+  justify-content: space-between;
+  &__button {
+    border: 0;
+    padding: 10px;
+    font-weight: bold;
+    width: 6rem;
+    height: 6rem;
+    &:hover {
+      background: $color-5;
+      color: $color-1;
+    }
+  }
   &__list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center;
+    // flex-wrap: wrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     border-bottom: 0px solid $color-5;
     margin: 0;
     padding: 0;
@@ -82,9 +99,9 @@
         background: $color-5;
       }
     }
-  }
-  &::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
