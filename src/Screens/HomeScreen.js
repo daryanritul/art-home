@@ -6,6 +6,7 @@ import { connect, useDispatch } from 'react-redux';
 import { getArtListHomeFun } from '../action/home';
 import DisplayArt from '../Components/DisplayArt';
 import { CLEAR_ART_LIST, SET_IS_LOADING_HOME } from '../action/action.type';
+import ArtModal from '../Components/ArtModal';
 
 const HomeScreen = ({
   artList,
@@ -16,6 +17,10 @@ const HomeScreen = ({
 }) => {
   const [search, setSearch] = useState('');
   const [selector, setSelector] = useState({ search: search, category: 'All' });
+  const [modalToggle, setModalToggle] = useState({
+    status: false,
+    data: null,
+  });
   const dispatch = useDispatch();
   const category = [
     'All',
@@ -94,7 +99,7 @@ const HomeScreen = ({
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={e => setSearch(e.target.value)}
             placeholder="Serarch for arts here"
           />
           <IoIosSearch
@@ -156,32 +161,41 @@ const HomeScreen = ({
           ))}
         </div> */}
 
-        {/* TODO:  Ui work to be done */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            marginRight: '15px',
-            marginLeft: '15px',
-          }}
-        >
-          <div style={{ width: '33%' }}>
+        <div className="artGrid">
+          <div className="artGrid__columns">
             {artList.col1.map((item, index) => (
-              <DisplayArt item={item} key={index} />
+              <DisplayArt
+                item={item}
+                key={index}
+                modal={modalToggle}
+                setModalToggle={setModalToggle}
+              />
             ))}
           </div>
-          <div style={{ width: '33%' }}>
+          <div className="artGrid__columns">
             {artList.col2.map((item, index) => (
-              <DisplayArt item={item} key={index} />
+              <DisplayArt
+                item={item}
+                key={index}
+                modal={modalToggle}
+                setModalToggle={setModalToggle}
+              />
             ))}
           </div>
-          <div style={{ width: '33%' }}>
+          <div className="artGrid__columns">
             {artList.col3.map((item, index) => (
-              <DisplayArt item={item} key={index} />
+              <DisplayArt
+                item={item}
+                key={index}
+                modal={modalToggle}
+                setModalToggle={setModalToggle}
+              />
             ))}
           </div>
         </div>
-
+        {modalToggle.status && (
+          <ArtModal item={modalToggle} setModalToggle={setModalToggle} />
+        )}
         {error ? (
           <div className="errorBox">
             <p>{error}</p>
@@ -196,7 +210,7 @@ const HomeScreen = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
   error: state.home.error,
@@ -204,7 +218,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getArtListHomeFun: (data) => getArtListHomeFun(data),
+  getArtListHomeFun: data => getArtListHomeFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
