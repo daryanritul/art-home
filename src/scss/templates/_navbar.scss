@@ -1,156 +1,158 @@
 .nav {
-	background: $color-1;
-	display: flex;
-	align-items: center;
-    justify-content: space-between;
-	height: clamp(6rem, 8vw, 8rem);
-	position: sticky;
-	top: 0;
-	z-index: 9999;
-	padding: 0 2rem;
-    &__list {
-        display: flex;
-        padding: 0 1rem;
-        li {
-            padding: 0 2rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.1rem;
-            font-size: clamp(1.5rem, 1.6vw, 1.8rem);
-            font-weight: bold;
-            transition: color ease-in-out 0.3s;
-        }
-        li:hover {
-            color: $color-5;
-        }
-        li::after {
-            content: "";
-            display: block;
-            height: 0.3rem;
-            background: $color-3;
-            border-radius: 3px;
-            transform: scale(0, 1);
-            transition: transform ease-in-out 0.3s;
-        }
-        li:hover::after {
-            transform: scale(1, 1);
-        }
+  background: $color-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  padding: 0 2rem;
+  &__list {
+    display: flex;
+    padding: 0 1rem;
+    li {
+      padding: 0 2rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      font-size: clamp(1.5rem, 1.6vw, 1.8rem);
+      font-weight: bold;
+      transition: color ease-in-out 0.3s;
     }
-    &__brand {
-        padding-right: 2rem;
-        img {
-            width: clamp(8rem, 15vw, 15rem);
-        }
-        &::after {
-            content: "";
-            display: block;
-            height: 0.3rem;
-            background: $color-3;
-            border-radius: 3px;
-            transform: scale(1, 1);
-        }
-        &:hover::after {
-            animation: logoLine 1s infinite;
-        }
-        @keyframes logoLine {
-            0% {
-                transform: scale(0, 1);
-            }
-            50% {
-                transform: scale(1, 1);
-            } 100% { transform: scale(0, 1);
-            }
-        }
-}
+    li:hover {
+      color: $color-5;
+    }
+    li::after {
+      content: '';
+      display: block;
+      height: 0.3rem;
+      background: $color-3;
+      border-radius: 3px;
+      transform: scale(0, 1);
+      transition: transform ease-in-out 0.3s;
+    }
+    li:hover::after {
+      transform: scale(1, 1);
+    }
+  }
+  &__brand {
+    padding-right: 2rem;
+    img {
+      width: clamp(8rem, 15vw, 15rem);
+    }
+    &::after {
+      content: '';
+      display: block;
+      height: 0.3rem;
+      background: $color-3;
+      border-radius: 3px;
+      transform: scale(1, 1);
+    }
+    &:hover::after {
+      animation: logoLine 1s infinite;
+    }
+    @keyframes logoLine {
+      0% {
+        transform: scale(0, 1);
+      }
+      50% {
+        transform: scale(1, 1);
+      }
+      100% {
+        transform: scale(0, 1);
+      }
+    }
+  }
 }
 .nav__item.nav.toggler .nav__list {
-	transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 
 .menu-btn {
-	margin-left: 1rem;
-	position: relative;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.5s ease-in-out;
-	&__burger::after,
-	&__burger::before {
-		content: "";
-		position: absolute;
-	}
-	&__burger,
-	&__burger::after,
-	&__burger::before {
-		width: 30px;
-		height: 3.5px;
-		background: $color-1;
-		transition: all 0.5s ease-in-out;
-		border-radius: 10px;
-		background: $color-5;
-	}
-	&__burger::after {
-		transform: translateY(-9px);
-	}
-	&__burger::before {
-		transform: translateY(9px);
-	}
+  margin-left: 1rem;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+  &__burger::after,
+  &__burger::before {
+    content: '';
+    position: absolute;
+  }
+  &__burger,
+  &__burger::after,
+  &__burger::before {
+    width: 30px;
+    height: 3.5px;
+    background: $color-1;
+    transition: all 0.5s ease-in-out;
+    border-radius: 10px;
+    background: $color-5;
+  }
+  &__burger::after {
+    transform: translateY(-9px);
+  }
+  &__burger::before {
+    transform: translateY(9px);
+  }
 }
 .nav.toggler {
-	.menu-btn__burger {
-		transform: translateX(-25px);
-		background: transparent;
-	}
-	.menu-btn__burger::after {
-		transform: rotate(45deg) translate(18px, -18px);
-	}
-	.menu-btn__burger::before {
-		transform: rotate(-45deg) translate(18px, 18px);
-	}
+  .menu-btn__burger {
+    transform: translateX(-25px);
+    background: transparent;
+  }
+  .menu-btn__burger::after {
+    transform: rotate(45deg) translate(18px, -18px);
+  }
+  .menu-btn__burger::before {
+    transform: rotate(-45deg) translate(18px, 18px);
+  }
 }
 
 .nav.toggler .nav__list {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-.nav.toggler .nav__list{
-	// top : 5rem;
-	transform : scale(1,1);
+.nav.toggler .nav__list {
+  // top : 5rem;
+  transform: scale(1, 1);
 }
 
 @media screen and (max-width: 768px) {
-	.nav__list {
-		flex-direction : column;
-		position : absolute;
-		right : 1rem;
-		top : 5rem;
-		padding : 1rem;
-		background : $color-1;
-		box-shadow: -5px 1px 7px -2px rgba(0, 0, 0, 0.43);
-		transform : scale(1,0);
-		transform-origin :top;
-		transition : transform .3s ease-in;
-		
-		li{
-			padding : 1rem;
-		}
-	}
-	.menu-btn {
-		display: flex;
-	}
+  .nav__list {
+    flex-direction: column;
+    position: absolute;
+    right: 1rem;
+    top: 5rem;
+    padding: 1rem;
+    background: $color-1;
+    box-shadow: -5px 1px 7px -2px rgba(0, 0, 0, 0.43);
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 0.3s ease-in;
+
+    li {
+      padding: 1rem;
+    }
+  }
+  .menu-btn {
+    display: flex;
+  }
 }
 @media screen and (max-width: 480px) {
-	.nav {
-		padding: 0 1rem;
-	}
+  .nav {
+    padding: 0 1rem;
+  }
 }
-.banner{
-	height : 50rem;
-	width : 100%;
-	display : flex;
-	justify-content : center;
-	align-items :center;
+.banner {
+  height: 50rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
