@@ -9,10 +9,9 @@ const Footer = () => {
       <div className="divider"></div>
       <div className="container">
         <div className="col">
-          <Link>Arts</Link>
-          <Link>Artists</Link>
-          <Link>About Us</Link>
-          <Link>Contact Us</Link>
+          <Link to="/">Arts</Link>
+          <Link to="/artist">Artists</Link>
+          <Link to="/contactus">Contact Us</Link>
         </div>
         <div className="col">
           <Link>

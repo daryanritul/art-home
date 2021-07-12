@@ -10,6 +10,7 @@ import ArtistScreen from './Screens/ArtistScreen';
 
 import HomeScreen from './Screens/HomeScreen';
 import ContactUsScreen from './Screens/ContactUsScreen';
+import NotFound from './Screens/NotFound';
 
 const App = () => {
   return (
@@ -20,15 +21,17 @@ const App = () => {
           <Route exact path="/">
             <HomeScreen />
           </Route>
-          <Route exact path="/artistscreen">
+          <Route exact path="/artist">
             <ArtistScreen />
           </Route>
-          <Route exact path="/artistprofilescreen/:artistuid">
+          <Route exact path="/artistprofile/:artistuid">
             <ArtistProfileScreen />
           </Route>
-          <Route exact path="/contactscreen">
+
+          <Route exact path="/contactus">
             <ContactUsScreen />
           </Route>
+          <Route exact path="*" component={NotFound} />
         </Switch>
         <Footer />
       </Router>

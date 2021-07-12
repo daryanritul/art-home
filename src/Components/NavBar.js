@@ -7,7 +7,7 @@ const NavBar = () => {
 
   return (
     <nav className={`nav ${toggle ? 'toggler' : ''}`}>
-      <Link className="nav__brand" href="#" to="/">
+      <Link className="nav__brand" to="/">
         <img src={logo} alt="" />
       </Link>
 
@@ -16,17 +16,17 @@ const NavBar = () => {
           <Link to="/">Arts</Link>
         </li>
         <li>
-          <Link to="/artistscreen">Artists</Link>
+          <Link to="/artist">Artists</Link>
         </li>
         {/* <li>
           <Link to="/artistscreen">About</Link>
         </li> */}
         <li>
-          <Link to="/contactscreen">Contact</Link>
+          <Link to="/contactus">Contact</Link>
         </li>
         <span>
           <li>
-            <Link to="/artistscreen">Login</Link>
+            <Link to="/artist">Login</Link>
           </li>
         </span>
       </ul>

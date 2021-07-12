@@ -71,10 +71,11 @@ const HomeScreen = ({
     if (
       !isLoading &&
       Math.round(scrollPosition) >=
-        document.body.offsetHeight - window.innerHeight - 500
+        document.body.offsetHeight - window.innerHeight - 600 &&
+      Math.round(scrollPosition) <=
+        document.body.offsetHeight - window.innerHeight - 200
     ) {
       dispatch({ type: SET_IS_LOADING_HOME, payload: true });
-
       handleLoadMore();
       console.log('Hi From ENd');
     }
@@ -90,7 +91,7 @@ const HomeScreen = ({
     });
   }, [selector]);
 
-  const scrollYHandler = scrollNum => {
+  const scrollYHandler = (scrollNum) => {
     ref.current.scrollLeft += scrollNum;
   };
 
@@ -104,7 +105,7 @@ const HomeScreen = ({
           <input
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Serarch for arts here"
           />
           <IoIosSearch
@@ -217,17 +218,13 @@ const HomeScreen = ({
           <div className="errorBox">
             <p>{error}</p>
           </div>
-        ) : (
-          <div className="load-more" onClick={() => handleLoadMore()}>
-            View More Arts
-          </div>
-        )}
+        ) : null}
       </section>
     </>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
   error: state.home.error,
@@ -235,7 +232,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getArtListHomeFun: data => getArtListHomeFun(data),
+  getArtListHomeFun: (data) => getArtListHomeFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
