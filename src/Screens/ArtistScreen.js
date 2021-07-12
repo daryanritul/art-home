@@ -31,7 +31,7 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
               <p>Born in {item.dateOfBirth}</p>
               <p>Date Started : {item.dateStarted}</p>
               <div class="card__button">
-                <Link to={'/artistprofilescreen/' + item.uid}>
+                <Link to={'/artistprofile/' + item.uid}>
                   <p>Visit Profile</p>
                 </Link>
               </div>
