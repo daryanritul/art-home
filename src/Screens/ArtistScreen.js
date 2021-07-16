@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getArtistListFun } from '../action/artist';
 import { getArtListHomeFun } from '../action/home';
 import artData from '../assets/tempData';
+import MessageBox from '../Components/MessageBox';
 
 const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
   useEffect(() => {
@@ -38,18 +39,19 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
             </div>
           );
         })}
+        {error ? <MessageBox message={error} type={'danger'} inverted /> : null}
       </div>
     </section>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artistList: state.artist.artistList,
   error: state.artist.error,
 });
 
 const mapDispatchToProps = {
-  getArtistListFun: (data) => getArtistListFun(data),
+  getArtistListFun: data => getArtistListFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistScreen);

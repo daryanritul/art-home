@@ -7,7 +7,8 @@ import { getArtListHomeFun } from '../action/home';
 import DisplayArt from '../Components/DisplayArt';
 import { CLEAR_ART_LIST, SET_IS_LOADING_HOME } from '../action/action.type';
 import ArtModal from '../Components/ArtModal';
-
+import MessageBox from '../Components/MessageBox';
+import Spinner from '../Components/Spinner';
 const HomeScreen = ({
   artList,
   error,
@@ -61,12 +62,6 @@ const HomeScreen = ({
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  // console.log(
-  //   Math.round(scrollPosition),
-  //   ' >=',
-  //   document.body.offsetHeight - window.innerHeight
-  // );
-
   useEffect(() => {
     if (
       !isLoading &&
@@ -91,7 +86,7 @@ const HomeScreen = ({
     });
   }, [selector]);
 
-  const scrollYHandler = (scrollNum) => {
+  const scrollYHandler = scrollNum => {
     ref.current.scrollLeft += scrollNum;
   };
 
@@ -105,19 +100,21 @@ const HomeScreen = ({
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={e => setSearch(e.target.value)}
             placeholder="Serarch for arts here"
           />
-          <IoIosSearch
-            className="icon"
-            onClick={() =>
-              setSelector({
-                ...selector,
-                search,
-              })
-            }
-            type="button"
-          />
+          <div className="search-bar__icon">
+            <IoIosSearch
+              className="icon"
+              onClick={() =>
+                setSelector({
+                  ...selector,
+                  search,
+                })
+              }
+              type="button"
+            />
+          </div>
         </div>
         <p>
           Search any arts by name, tags and filter by category, visit artists
@@ -171,60 +168,33 @@ const HomeScreen = ({
       </div>
 
       {/* Art Section */}
+      {isLoading && <Spinner />}
 
       <section>
-        {/* <div className="artGallery">
-          {artList.map((item, index) => (
-            <DisplayArt item={item} key={index} />
-          ))}
-        </div> */}
-
         <div className="artGrid">
-          <div className="artGrid__columns">
-            {artList.col1.map((item, index) => (
-              <DisplayArt
-                item={item}
-                key={index}
-                modal={modalToggle}
-                setModalToggle={setModalToggle}
-              />
-            ))}
-          </div>
-          <div className="artGrid__columns">
-            {artList.col2.map((item, index) => (
-              <DisplayArt
-                item={item}
-                key={index}
-                modal={modalToggle}
-                setModalToggle={setModalToggle}
-              />
-            ))}
-          </div>
-          <div className="artGrid__columns">
-            {artList.col3.map((item, index) => (
-              <DisplayArt
-                item={item}
-                key={index}
-                modal={modalToggle}
-                setModalToggle={setModalToggle}
-              />
-            ))}
-          </div>
+          {artList.map((columns, index) => (
+            <div className="artGrid__columns" key={index}>
+              {columns.map((item, index) => (
+                <DisplayArt
+                  item={item}
+                  key={index}
+                  modal={modalToggle}
+                  setModalToggle={setModalToggle}
+                />
+              ))}
+            </div>
+          ))}
         </div>
         {modalToggle.status && (
           <ArtModal item={modalToggle} setModalToggle={setModalToggle} />
         )}
-        {error ? (
-          <div className="errorBox">
-            <p>{error}</p>
-          </div>
-        ) : null}
+        {error ? <MessageBox message={error} type={'danger'} inverted /> : null}
       </section>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artList: state.home.artList,
   lastArt: state.home.lastArt,
   error: state.home.error,
@@ -232,7 +202,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getArtListHomeFun: (data) => getArtListHomeFun(data),
+  getArtListHomeFun: data => getArtListHomeFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

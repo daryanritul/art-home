@@ -4,11 +4,16 @@ import {
   SET_ARTIST_LAST_ART,
   SET_ARTIST_PROFILE,
   SET_ERROR_ARTIST_PROFILE,
+  SET_IS_LOADING_ARTIST_PROFILE,
 } from './action.type';
 
 export const getArtistProfileFun =
   ({ uid }) =>
-  async (dispatch) => {
+  async dispatch => {
+    dispatch({
+      type: SET_IS_LOADING_ARTIST_PROFILE,
+      payload: true,
+    });
     try {
       const profileDoc = await firestore.collection('artist').doc(uid).get();
 
@@ -23,11 +28,15 @@ export const getArtistProfileFun =
     } catch (error) {
       dispatch({ type: SET_ERROR_ARTIST_PROFILE, payload: error });
     }
+    dispatch({
+      type: SET_IS_LOADING_ARTIST_PROFILE,
+      payload: false,
+    });
   };
 
 export const getArtistArtFun =
   ({ uid, lastArt }) =>
-  async (dispatch) => {
+  async dispatch => {
     try {
       if (uid) {
         const artList = firestore.collection('art');
@@ -43,10 +52,10 @@ export const getArtistArtFun =
         if (snapshot.empty) {
           dispatch({
             type: SET_ERROR_ARTIST_PROFILE,
-            payload: 'No ART FOUND',
+            payload: 'NO More Arts',
           });
         } else {
-          const tempDoc = snapshot.docs.map((doc) => {
+          const tempDoc = snapshot.docs.map(doc => {
             return { artId: doc.id, ...doc.data() };
           });
           dispatch({
@@ -67,4 +76,8 @@ export const getArtistArtFun =
         payload: error,
       });
     }
+    dispatch({
+      type: SET_IS_LOADING_ARTIST_PROFILE,
+      payload: false,
+    });
   };

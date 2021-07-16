@@ -1,0 +1,35 @@
+.danger {
+  @include rgba-hover($color-danger, $color-bg-danger, $hover: false);
+  &.hover {
+    @include rgba-hover($color-danger, $color-bg-danger, $hover: true);
+    transition: background 300ms, color 300ms;
+  }
+}
+.warning {
+  @include rgba-hover($color-warning, $color-bg-warning);
+  &.hover {
+    @include rgba-hover($color-warning, $color-bg-warning, $hover: true);
+    transition: background 300ms, color 300ms;
+  }
+}
+.info {
+  @include rgba-hover($color-info, $color-bg-info);
+  &.hover {
+    @include rgba-hover($color-info, $color-bg-info, $hover: true);
+    transition: background 300ms, color 300ms;
+  }
+}
+.success {
+  @include rgba-hover($color-success, $color-bg-success);
+  &.hover {
+    @include rgba-hover($color-success, $color-bg-success, $hover: true);
+    transition: background 300ms, color 300ms;
+  }
+}
+.default {
+  @include rgba-hover($color-5, $color-3);
+  &.hover {
+    @include rgba-hover($color-5, $color-3, $hover: true);
+    transition: background 300ms, color 300ms;
+  }
+}

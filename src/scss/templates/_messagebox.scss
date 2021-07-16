@@ -1,0 +1,12 @@
+.error-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  .error-title {
+    padding: 10px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }
+}

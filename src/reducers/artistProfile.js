@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   artistProfile: [],
-  artistArtList: { col1: [], col2: [], col3: [] },
+  artistArtList: [[], [], []],
   artistLastArt: [],
   error: '',
   isLoading: false,
@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
     case CLEAR_ARTIST_ART_LIST:
       return {
         ...state,
-        artistArtList: { col1: [], col2: [], col3: [] },
+        artistArtList: [[], [], []],
       };
 
     case SET_ARTIST_PROFILE:
@@ -30,23 +30,25 @@ export default (state = initialState, action) => {
         error: '',
       };
     case SET_ARTIST_ARTLIST:
-      const { col1, col2, col3 } = state.artistArtList;
+      //   const { col1, col2, col3 } = state.artistArtList;
       const { payload } = action;
       const payloadlen = payload.length;
 
-      const newCol1 = payload.slice(0, payloadlen / 3);
-      const newCol2 = payload.slice(payloadlen / 3, (payloadlen / 3) * 2);
-      const newCol3 = payload.slice((payloadlen / 3) * 2, payloadlen);
+      const newCol1 = payload.slice(0, Math.ceil(payloadlen / 3));
+      const newCol2 = payload.slice(
+        Math.ceil(payloadlen / 3),
+        Math.ceil((payloadlen / 3) * 2)
+      );
+      const newCol3 = payload.slice(
+        Math.ceil((payloadlen / 3) * 2),
+        payloadlen
+      );
 
-      const newArtList = {
-        col1: Object.values(col1).concat(newCol1),
-        col2: Object.values(col2).concat(newCol2),
-        col3: Object.values(col3).concat(newCol3),
-      };
-
-      console.log('newCol1', newCol1);
-      console.log('newCol2', newCol2);
-      console.log('newCol3', newCol3);
+      const newArtList = [
+        state.artistArtList[0].concat(newCol1),
+        state.artistArtList[1].concat(newCol2),
+        state.artistArtList[2].concat(newCol3),
+      ];
 
       return {
         ...state,

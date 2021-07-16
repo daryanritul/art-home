@@ -52,6 +52,223 @@ ul {
   list-style: none;
 }
 
+.danger {
+  background-color: #fccbc7;
+  color: #f44336;
+}
+.danger.invert {
+  background-color: #f44336;
+  color: #fccbc7;
+}
+.danger.hover {
+  background-color: #fccbc7;
+  color: #f44336;
+  transition: background 300ms, color 300ms;
+}
+.danger.hover.invert {
+  background-color: #f44336;
+  color: #fccbc7;
+}
+.danger.hover.invert:hover {
+  background-color: #fccbc7;
+  color: #f44336;
+}
+.danger.hover:hover {
+  background-color: #f44336;
+  color: #fccbc7;
+}
+
+.warning {
+  background-color: #f9dfb9;
+  color: #eca02d;
+}
+.warning.invert {
+  background-color: #eca02d;
+  color: #f9dfb9;
+}
+.warning.hover {
+  background-color: #f9dfb9;
+  color: #eca02d;
+  transition: background 300ms, color 300ms;
+}
+.warning.hover.invert {
+  background-color: #eca02d;
+  color: #f9dfb9;
+}
+.warning.hover.invert:hover {
+  background-color: #f9dfb9;
+  color: #eca02d;
+}
+.warning.hover:hover {
+  background-color: #eca02d;
+  color: #f9dfb9;
+}
+
+.info {
+  background-color: #e1e2e0;
+  color: #201f20;
+}
+.info.invert {
+  background-color: #201f20;
+  color: #e1e2e0;
+}
+.info.hover {
+  background-color: #e1e2e0;
+  color: #201f20;
+  transition: background 300ms, color 300ms;
+}
+.info.hover.invert {
+  background-color: #201f20;
+  color: #e1e2e0;
+}
+.info.hover.invert:hover {
+  background-color: #e1e2e0;
+  color: #201f20;
+}
+.info.hover:hover {
+  background-color: #201f20;
+  color: #e1e2e0;
+}
+
+.success {
+  background-color: #cde4ca;
+  color: #6fb065;
+}
+.success.invert {
+  background-color: #6fb065;
+  color: #cde4ca;
+}
+.success.hover {
+  background-color: #cde4ca;
+  color: #6fb065;
+  transition: background 300ms, color 300ms;
+}
+.success.hover.invert {
+  background-color: #6fb065;
+  color: #cde4ca;
+}
+.success.hover.invert:hover {
+  background-color: #cde4ca;
+  color: #6fb065;
+}
+.success.hover:hover {
+  background-color: #6fb065;
+  color: #cde4ca;
+}
+
+.default {
+  background-color: #BFB195;
+  color: #3C363A;
+}
+.default.invert {
+  background-color: #3C363A;
+  color: #BFB195;
+}
+.default.hover {
+  background-color: #BFB195;
+  color: #3C363A;
+  transition: background 300ms, color 300ms;
+}
+.default.hover.invert {
+  background-color: #3C363A;
+  color: #BFB195;
+}
+.default.hover.invert:hover {
+  background-color: #BFB195;
+  color: #3C363A;
+}
+.default.hover:hover {
+  background-color: #3C363A;
+  color: #BFB195;
+}
+
+.footer {
+  background-color: #3C363A;
+  width: 100%;
+  display: flex;
+  padding: 5rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.footer .divider {
+  background: #fff;
+  height: 0.1rem;
+  width: 100%;
+}
+.footer .container {
+  display: flex;
+  text-align: center;
+  color: #fff;
+  flex-grow: 1;
+}
+.footer .container > * {
+  width: 100%;
+}
+.footer .col > * {
+  display: block;
+  padding: 1rem;
+}
+.footer .col > * span {
+  text-decoration: underline;
+  font-weight: bold;
+}
+.footer .detail > * {
+  padding: 1rem;
+  font-size: 1.4rem;
+  text-align: left;
+  margin: 0;
+}
+.footer .detail img {
+  width: 20rem;
+}
+.footer p {
+  text-align: center;
+  color: #fff;
+  padding: 0.5rem;
+  margin: 0;
+}
+
+.spinner-overlay {
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00000070;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+.spinner-container {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #F2F2EE;
+  border-radius: 50%;
+  border-top-color: #3C363A;
+  animation: spin 1s ease-in-out infinite;
+  animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-text {
+  font-size: 1.7rem;
+  padding: 1rem;
+  color: #F2F2EE;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
 .nav {
   background: #F2F2EE;
   display: flex;
@@ -239,7 +456,7 @@ ul {
   padding: 0;
 }
 .search-bar input {
-  width: 100%;
+  width: 90%;
   border: 0;
   background: transparent;
   padding: 1rem;
@@ -249,18 +466,22 @@ ul {
 .search-bar input:focus {
   outline: none;
 }
+.search-bar__icon {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .search-bar .icon {
-  font-size: clamp(3.7rem, 2.4vw, 8rem);
+  width: 40px;
+  height: 40px;
   color: #3C363A;
   padding: 3px;
-  width: 20%;
   cursor: pointer;
-  transition: font-size 0.2s ease;
+  transition: transform 0.2s ease;
 }
 .search-bar .icon:hover {
-  font-size: clamp(3.9rem, 2.6vw, 8rem);
-  color: #3C363A;
-  padding: 1px;
+  transform: scale(1.1);
 }
 
 .category {
@@ -398,6 +619,7 @@ ul {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   margin: 0 10rem;
+  margin-bottom: 20px;
 }
 .artGrid__columns {
   display: grid;
@@ -639,53 +861,6 @@ ul {
     margin: 1px;
   }
 }
-.footer {
-  background-color: #3C363A;
-  width: 100%;
-  display: flex;
-  padding: 5rem;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-}
-.footer .divider {
-  background: #fff;
-  height: 0.1rem;
-  width: 100%;
-}
-.footer .container {
-  display: flex;
-  text-align: center;
-  color: #fff;
-  flex-grow: 1;
-}
-.footer .container > * {
-  width: 100%;
-}
-.footer .col > * {
-  display: block;
-  padding: 1rem;
-}
-.footer .col > * span {
-  text-decoration: underline;
-  font-weight: bold;
-}
-.footer .detail > * {
-  padding: 1rem;
-  font-size: 1.4rem;
-  text-align: left;
-  margin: 0;
-}
-.footer .detail img {
-  width: 20rem;
-}
-.footer p {
-  text-align: center;
-  color: #fff;
-  padding: 0.5rem;
-  margin: 0;
-}
-
 .artistsProfiles {
   background-color: #3C363A;
 }
@@ -896,6 +1071,19 @@ textarea:focus {
 .social_links img {
   padding: 2rem;
   cursor: pointer;
+}
+
+.error-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+.error-box .error-title {
+  padding: 10px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=index.css.map */

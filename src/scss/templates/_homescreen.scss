@@ -27,7 +27,7 @@
   border-radius: 5px;
   padding: 0;
   input {
-    width: 100%;
+    width: 90%;
     border: 0;
     background: transparent;
     padding: 1rem;
@@ -37,17 +37,22 @@
   input:focus {
     outline: none;
   }
+  &__icon {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .icon {
-    font-size: clamp(3.7rem, 2.4vw, 8rem);
+    width: 40px;
+    height: 40px;
     color: $color-5;
     padding: 3px;
-    width: 20%;
     cursor: pointer;
-    transition: font-size 0.2s ease;
+    transition: transform 0.2s ease;
+
     &:hover {
-      font-size: clamp(3.9rem, 2.6vw, 8rem);
-      color: $color-5;
-      padding: 1px;
+      transform: scale(1.1);
     }
   }
 }
@@ -191,6 +196,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   margin: 0 10rem;
+  margin-bottom: 20px;
   &__columns {
     display: grid;
     row-gap: 10px;

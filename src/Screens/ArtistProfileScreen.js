@@ -14,6 +14,8 @@ import {
   SET_IS_LOADING_ARTIST_PROFILE,
 } from '../action/action.type';
 import ArtModal from '../Components/ArtModal';
+import MessageBox from '../Components/MessageBox';
+import Spinner from '../Components/Spinner';
 
 const ArtistProfileScreen = ({
   artistProfile,
@@ -78,9 +80,9 @@ const ArtistProfileScreen = ({
   if (!artistuid) {
     history.back();
   }
-
   return (
     <>
+      {isLoading && <Spinner />}
       {artistProfile.length !== 0 ? (
         <>
           <div className="pageTitle">
@@ -124,56 +126,38 @@ const ArtistProfileScreen = ({
             <h2>MY ARTS</h2>
           </div>
           <div className="artGrid">
-            <div className="artGrid__columns">
-              {artistArtList.col1.map((item, index) => (
-                <DisplayArt
-                  item={item}
-                  key={index}
-                  modal={modalToggle}
-                  setModalToggle={setModalToggle}
-                />
-              ))}
-            </div>
-            <div className="artGrid__columns">
-              {artistArtList.col2.map((item, index) => (
-                <DisplayArt
-                  item={item}
-                  key={index}
-                  modal={modalToggle}
-                  setModalToggle={setModalToggle}
-                />
-              ))}
-            </div>
-            <div className="artGrid__columns">
-              {artistArtList.col3.map((item, index) => (
-                <DisplayArt
-                  item={item}
-                  key={index}
-                  modal={modalToggle}
-                  setModalToggle={setModalToggle}
-                />
-              ))}
-            </div>
-            {modalToggle.status && (
-              <ArtModal item={modalToggle} setModalToggle={setModalToggle} />
-            )}
+            {artistArtList.map((columns, index) => (
+              <div className="artGrid__columns" key={index}>
+                {columns.map((item, index) => (
+                  <DisplayArt
+                    item={item}
+                    key={index}
+                    modal={modalToggle}
+                    setModalToggle={setModalToggle}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
-          {error ? (
-            <div className="errorBox">
-              <p>{error}</p>
-            </div>
-          ) : null}
+          {modalToggle.status && (
+            <ArtModal item={modalToggle} setModalToggle={setModalToggle} />
+          )}
+          {error ? <MessageBox message={error} type={'info'} inverted /> : null}
         </>
       ) : (
-        <div className="errorBox">
-          <p>No Artist Profile Found With ID pass with</p>
-        </div>
+        !isLoading && (
+          <MessageBox
+            message={'No Artist Profile Found With ID pass with'}
+            type={'danger'}
+            inverted
+          />
+        )
       )}
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   artistProfile: state.artistProfile.artistProfile,
   artistArtList: state.artistProfile.artistArtList,
   lastArt: state.artistProfile.artistLastArt,
@@ -182,8 +166,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getArtistProfileFun: (data) => getArtistProfileFun(data),
-  getArtistArtFun: (data) => getArtistArtFun(data),
+  getArtistProfileFun: data => getArtistProfileFun(data),
+  getArtistArtFun: data => getArtistArtFun(data),
 };
 
 export default connect(
