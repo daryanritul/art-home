@@ -101,19 +101,19 @@ const ArtistProfileScreen = ({
                   artistProfile.social.map((social, index) => {
                     if (social.socialProviderName === 'Instagram') {
                       return (
-                        <a href={social.socialLink} target="_blank">
+                        <a key={index} href={social.socialLink} target="_blank">
                           <img src={insta} alt="Instagram" />
                         </a>
                       );
                     } else if (social.socialProviderName === 'Facebook') {
                       return (
-                        <a href={social.socialLink} target="_blank">
+                        <a key={index} href={social.socialLink} target="_blank">
                           <img src={facebook} alt="Facebook" />
                         </a>
                       );
                     } else if (social.socialProviderName === 'Twitter') {
                       return (
-                        <a href={social.socialLink} target="_blank">
+                        <a key={index} href={social.socialLink} target="_blank">
                           <img src={twitter} alt="Twitter" />
                         </a>
                       );
