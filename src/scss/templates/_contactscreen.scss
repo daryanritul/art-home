@@ -1,0 +1,62 @@
+
+.contact-form{
+display: flex;
+ justify-content: center;
+ align-items: center;
+   padding: 1rem;
+    position : relative;
+    flex-wrap: wrap;
+}
+
+.front{
+    background-color: $color-3;
+    padding : 3rem;
+  
+    & button{
+        border : 0;
+        padding : 1.5rem 3rem;
+        font-size: 1.8rem;
+        background: $color-5;
+        color : $color-1;
+    }
+    & button:hover{
+        background: lighten($color: $color-5, $amount: 10%);
+    }
+}
+
+.title{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: .5rem;
+}
+.contact-list{
+    margin  : 0;
+    padding : 1rem;
+    list-style: none;
+}
+.contact-list li{
+    margin-bottom: 1rem;
+}
+
+
+.form {
+    margin : 2rem 0 0;
+    &__label{
+        display: block;
+        padding : 1rem 0;
+    }
+    &__text{
+        margin-bottom : .5rem;
+        padding : 1rem;
+        width : 100%;
+        border : 0;
+        font-size: 1.6rem;
+    }
+    
+}
+input:focus{
+    outline: none;
+}
+textarea:focus{
+    outline : none;
+}

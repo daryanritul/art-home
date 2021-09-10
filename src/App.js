@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './css/styles.css';
+import './css/index.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-function App() {
+import Footer from './Components/Footer';
+import NavBar from './Components/NavBar';
+import ArtistProfileScreen from './Screens/ArtistProfileScreen';
+import ArtistScreen from './Screens/ArtistScreen';
+
+import HomeScreen from './Screens/HomeScreen';
+import ContactUsScreen from './Screens/ContactUsScreen';
+import NotFound from './Screens/NotFound';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/">
+            <HomeScreen />
+          </Route>
+          <Route exact path="/artist">
+            <ArtistScreen />
+          </Route>
+          <Route exact path="/artistprofile/:artistuid">
+            <ArtistProfileScreen />
+          </Route>
+
+          <Route exact path="/contactus">
+            <ContactUsScreen />
+          </Route>
+          <Route exact path="*" component={NotFound} />
+        </Switch>
+        <Footer />
+      </Router>
+    </>
   );
-}
+};
 
 export default App;

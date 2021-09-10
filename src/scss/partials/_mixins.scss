@@ -1,0 +1,20 @@
+@mixin rgba-hover($color, $bg-color, $hover: false) {
+  background-color: $bg-color;
+  color: $color;
+  &.invert {
+    background-color: $color;
+    color: $bg-color;
+    @if $hover {
+      &:hover {
+        background-color: $bg-color;
+        color: $color;
+      }
+    }
+  }
+  @if $hover {
+    &:hover {
+      background-color: $color;
+      color: $bg-color;
+    }
+  }
+}
