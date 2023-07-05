@@ -1,33 +1,32 @@
-import { firestore } from '../firebase';
+import { firestore } from "../firebase";
 import {
   ADD_HOME_PAGE_ART,
   SET_ERROR_HOME,
   SET_IS_LOADING_HOME,
   SET_LAST_ART,
-} from './action.type';
-import firebase from 'firebase/app';
-
+} from "./action.type";
+import firebase from "firebase/app";
 export const getArtListHomeFun =
   ({ categoryFilter, search, lastArt }) =>
-  async dispatch => {
+  async (dispatch) => {
     try {
-      console.log('categoryFilter', categoryFilter);
-      console.log('search', search);
+      console.log("categoryFilter", categoryFilter);
+      console.log("search", search);
       const artList = firestore
-        .collection('art')
-        .where('isArchive', '==', false);
+        .collection("art")
+        .where("isArchive", "==", false);
 
-      if (categoryFilter === 'All' && !search) {
+      if (categoryFilter === "All" && !search) {
         const snapshot = await artList
-          .orderBy('timeStamp', 'desc')
+          .orderBy("timeStamp", "desc")
           .startAfter(lastArt)
           .limit(12)
           .get();
 
         if (snapshot.empty) {
-          dispatch({ type: SET_ERROR_HOME, payload: 'The End! No More Arts' });
+          dispatch({ type: SET_ERROR_HOME, payload: "The End! No More Arts" });
         } else {
-          const tempDoc = snapshot.docs.map(doc => {
+          const tempDoc = snapshot.docs.map((doc) => {
             return { artId: doc.id, ...doc.data() };
           });
           dispatch({
@@ -37,18 +36,18 @@ export const getArtListHomeFun =
           dispatch({ type: SET_ERROR_HOME, payload: null });
           dispatch({ type: ADD_HOME_PAGE_ART, payload: tempDoc });
         }
-      } else if (categoryFilter !== 'All' && !search) {
+      } else if (categoryFilter !== "All" && !search) {
         const snapshot = await artList
-          .where('category', '==', categoryFilter)
-          .orderBy('timeStamp', 'desc')
+          .where("category", "==", categoryFilter)
+          .orderBy("timeStamp", "desc")
           .startAfter(lastArt)
           .limit(12)
           .get();
 
         if (snapshot.empty) {
-          dispatch({ type: SET_ERROR_HOME, payload: 'The End! No More Arts' });
+          dispatch({ type: SET_ERROR_HOME, payload: "The End! No More Arts" });
         } else {
-          const tempDoc = snapshot.docs.map(doc => {
+          const tempDoc = snapshot.docs.map((doc) => {
             return { artId: doc.id, ...doc.data() };
           });
           dispatch({
@@ -58,20 +57,20 @@ export const getArtListHomeFun =
           dispatch({ type: SET_ERROR_HOME, payload: null });
           dispatch({ type: ADD_HOME_PAGE_ART, payload: tempDoc });
         }
-      } else if (categoryFilter !== 'All' && search) {
-        console.log('if 3');
+      } else if (categoryFilter !== "All" && search) {
+        console.log("if 3");
         const snapshot = await artList
-          .where('category', '==', categoryFilter)
-          .where('arrayForSearch', 'array-contains', search)
-          .orderBy('timeStamp', 'desc')
+          .where("category", "==", categoryFilter)
+          .where("arrayForSearch", "array-contains", search)
+          .orderBy("timeStamp", "desc")
           .startAfter(lastArt)
           .limit(12)
           .get();
 
         if (snapshot.empty) {
-          dispatch({ type: SET_ERROR_HOME, payload: 'No Results found' });
+          dispatch({ type: SET_ERROR_HOME, payload: "No Results found" });
         } else {
-          const tempDoc = snapshot.docs.map(doc => {
+          const tempDoc = snapshot.docs.map((doc) => {
             return { artId: doc.id, ...doc.data() };
           });
           dispatch({
@@ -81,22 +80,22 @@ export const getArtListHomeFun =
           dispatch({ type: SET_ERROR_HOME, payload: null });
           dispatch({ type: ADD_HOME_PAGE_ART, payload: tempDoc });
         }
-      } else if (categoryFilter === 'All' && search) {
-        console.log('IF 4');
-        console.log('IF 4 lastArt', lastArt);
+      } else if (categoryFilter === "All" && search) {
+        console.log("IF 4");
+        console.log("IF 4 lastArt", lastArt);
         const snapshot = await artList
-          .where('arrayForSearch', 'array-contains', search)
-          .orderBy('timeStamp', 'desc')
+          .where("arrayForSearch", "array-contains", search)
+          .orderBy("timeStamp", "desc")
           .startAfter(lastArt)
           .limit(12)
           .get();
 
-        console.log('snapshot', snapshot);
+        console.log("snapshot", snapshot);
 
         if (snapshot.empty) {
-          dispatch({ type: SET_ERROR_HOME, payload: 'No Results found' });
+          dispatch({ type: SET_ERROR_HOME, payload: "No Results found" });
         } else {
-          const tempDoc = snapshot.docs.map(doc => {
+          const tempDoc = snapshot.docs.map((doc) => {
             return { artId: doc.id, ...doc.data() };
           });
           dispatch({
@@ -116,12 +115,12 @@ export const getArtListHomeFun =
     });
   };
 
-export const sendContactUsFormDetailsFun = data => async dispatch => {
+export const sendContactUsFormDetailsFun = (data) => async (dispatch) => {
   const { name, email, message, quearyOrRegistration, setIsDataSend } = data;
 
   try {
     await firestore
-      .collection('contactUs')
+      .collection("contactUs")
       .doc()
       .set({
         name,
@@ -131,11 +130,11 @@ export const sendContactUsFormDetailsFun = data => async dispatch => {
         timeStamp: firebase.firestore.Timestamp.now(),
       })
       .then(() => {
-        console.log('Data Send');
+        console.log("Data Send");
         setIsDataSend(true);
       })
-      .catch(error => console.log('Error', error));
+      .catch((error) => console.log("Error", error));
   } catch (error) {
-    console.log('error', error);
+    console.log("error", error);
   }
 };

@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getArtistListFun } from '../action/artist';
-import { getArtListHomeFun } from '../action/home';
-import artData from '../assets/tempData';
-import MessageBox from '../Components/MessageBox';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { getArtistListFun } from "../action/artist";
+import MessageBox from "../Components/MessageBox";
 
 const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
   useEffect(() => {
     getArtistListFun();
   }, []);
-  console.log('ERROR', error);
+  console.log("ERROR", error);
 
   return (
     <section className="artistsProfiles">
@@ -32,26 +30,26 @@ const ArtistScreen = ({ artistList, error, getArtistListFun }) => {
               <p>Born in {item.dateOfBirth}</p>
               <p>Date Started : {item.dateStarted}</p>
               <div class="card__button">
-                <Link to={'/artistprofile/' + item.uid}>
+                <Link to={"/artistprofile/" + item.uid}>
                   <p>Visit Profile</p>
                 </Link>
               </div>
             </div>
           );
         })}
-        {error ? <MessageBox message={error} type={'danger'} inverted /> : null}
+        {error ? <MessageBox message={error} type={"danger"} inverted /> : null}
       </div>
     </section>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   artistList: state.artist.artistList,
   error: state.artist.error,
 });
 
 const mapDispatchToProps = {
-  getArtistListFun: data => getArtistListFun(data),
+  getArtistListFun: (data) => getArtistListFun(data),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtistScreen);

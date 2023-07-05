@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from '../assets/Images/logo.svg';
+import React from "react";
+import logo from "../assets/Images/logo.svg";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,12 +14,12 @@ const Footer = () => {
           <Link to="/contactus">Contact Us</Link>
         </div>
         <div className="col">
-          <Link>
+          <a href="https://artist-arthome-df8ff.web.app">
             Artist <span> Login </span>
-          </Link>
-          <Link>
+          </a>
+          <a href="https://artist-arthome-df8ff.web.app">
             New Artist?<span> Register </span>
-          </Link>
+          </a>
         </div>
         <div className="col detail">
           <img src={logo} />

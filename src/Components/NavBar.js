@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import logo from '../assets/Images/logo.svg';
+import logo from "../assets/Images/logo.svg";
 const NavBar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className={`nav ${toggle ? 'toggler' : ''}`}>
+    <nav className={`nav ${toggle ? "toggler" : ""}`}>
       <Link className="nav__brand" to="/">
         <img src={logo} alt="" />
       </Link>
@@ -26,7 +26,7 @@ const NavBar = () => {
         </li>
         <span>
           <li>
-            <Link to="/artist">Login</Link>
+            <a href="https://artist-arthome-df8ff.web.app">Login</a>
           </li>
         </span>
       </ul>
